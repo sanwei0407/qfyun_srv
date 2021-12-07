@@ -14,7 +14,6 @@ var linkmanSchema = mongoose.Schema({
 
 
 
-
 // mongoose.model(对应的是我们的数据库中哪个表，表的描述)
 var LinkMan = mongoose.model('linkman', linkmanSchema);
 

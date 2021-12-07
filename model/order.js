@@ -18,6 +18,9 @@ var orderSchema = mongoose.Schema({
         checkDate: Date, // 乘车时的验票时间
         linkMan: Array , // 当前订单的乘车人
         amount: Number, // 订单总金额 （以分为单位）
+        flightNum: String, // 线路id
+},{
+  timestamps: true 
 });
 
 

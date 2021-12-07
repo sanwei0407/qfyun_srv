@@ -1,7 +1,5 @@
 const express = require('express');
-
 const  router = express.Router();
-
 const User = require("../model/user")
 
 // 添加用户
@@ -53,7 +51,5 @@ router.post('/edit',async (req,res)=>{
     }
 
 })
-
-
 
 module.exports = router;

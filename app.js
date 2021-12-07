@@ -19,16 +19,20 @@ app.use(urlencodedParser)
 
 
 // 各个路由的导入
-const userRouter = require('./routers/user')
+const userRouter = require('./routers/user')   // 用户路由
+const orderRouter = require('./routers/order') // 订单路由
+const flightRouter = require('./routers/flight') // 航班线路路由
+const stationRouter = require('./routers/station') // 站点路由
+const linkmanRouter = require('./routers/linkman') // 乘车人路由
 
 
 
 // 前台用户流程
-
 app.use('/api/v1/user', userRouter )
-
-
-
+app.use('/api/v1/order', orderRouter)
+app.use('/api/v1/flight', flightRouter)
+app.use('/api/v1/station', stationRouter)
+app.use('/api/v1/linkman', linkmanRouter)
 
 
 
