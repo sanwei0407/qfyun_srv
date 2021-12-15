@@ -15,10 +15,10 @@ router.post('/add', async (req,res)=>{
 
     // 添加入库
     try{
-        const one = await User.findOne({ phone }) // 找不到的话返回 null 
+        const one = await LinkMan.findOne({ phone }) // 找不到的话返回 null 
         if(one) return res.send({ success:false,info:'当前手机号码已经被占用' })
 
-        await User.create({
+        await LinkMan.create({
             realName,
             idNum,
             phone,
@@ -27,6 +27,7 @@ router.post('/add', async (req,res)=>{
         res.send({success:true,info:'添加成功'})
 
     } catch(e) {
+        console.log('e',e)
         res.send( {success:false,info:'未知错误 请于网站管理员联系'});
     }
 

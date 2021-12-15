@@ -12,6 +12,7 @@ var flightSchema = mongoose.Schema({
         preDay: Number ,       //  最长的预售天数
         startStations: Array,  //  起点城市允许上车的站点
         arriveStations:Array, // 终点城市允许下车的站点 
+        startTime: String      // 出发时间
 },{
         timestamps:true
 });
