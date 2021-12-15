@@ -34,12 +34,12 @@ router.post('/preOrder', async (req,res)=>{
         const amount =  flight.ticketPrice * linkMan.length;  
 
         // const ip = req.headers['x-forwarder-for'];
-        const ip ='预设的ip地址' // todo
+        const ip = req.ip // todo
 
         
         try {
             // 执行入库操作
-            await Order.create({
+            const order = await Order.create({
                 phone,
                 startCity,
                 arriveCity,
@@ -55,7 +55,7 @@ router.post('/preOrder', async (req,res)=>{
                 checkDate: null,
                 orderState: 1
             })
-            res.send({success:true,info:'添加成功'})
+            res.send({success:true,info:'添加成功', data: order._id})
         }catch(e){
             console.log(e)
             res.send({success:false,info:'添加失败'})
