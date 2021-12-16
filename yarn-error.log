@@ -1,30 +1,20 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add ioredisaxios
+  C:\Program Files\nodejs\node.exe C:\Users\Matebook E\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/Users/mac/swclass/flutter/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/sbin:/Users/mac/swclass/flutter/bin:/opt/homebrew/bin:/opt/homebrew/sbin
+  C:\Windows\System32\HWAudioDriverLibs;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Program Files\nodejs\;D:\Program Files\Tencent\微信web开发者工具\dll;;C:\Program Files\Git\cmd;C:\Users\Matebook E\AppData\Local\Microsoft\WindowsApps;;C:\Users\Matebook E\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Matebook E\AppData\Roaming\npm
 
 Yarn version: 
-  1.22.10
+  1.22.17
 
 Node version: 
-  14.15.4
+  16.13.1
 
 Platform: 
-  darwin x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.npmjs.org/ioredisaxios: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
-      at Request.emit (events.js:315:20)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
-      at Request.emit (events.js:315:20)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
-      at Object.onceWrapper (events.js:421:28)
-      at IncomingMessage.emit (events.js:327:22)
-      at endReadableNT (internal/streams/readable.js:1327:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: EEXIST: file already exists, mkdir 'D:\coding\qfyun_srv\node_modules\ioredis'
 
 npm manifest: 
   {
