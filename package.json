@@ -10,11 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "@alicloud/sms-sdk": "^1.1.6",
+    "axios": "^0.24.0",
     "body-parse": "^0.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "ioredis": "^4.28.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.14"
+    "mongoose": "^6.0.14",
+    "utility": "^1.17.0"
   }
 }

@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Matebook E\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+  C:\Program Files\nodejs\node.exe C:\Users\Matebook E\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add ioredis
 
 PATH: 
-  C:\Windows\System32\HWAudioDriverLibs;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Program Files\nodejs\;D:\Program Files\Tencent\微信web开发者工具\dll;;C:\Program Files\Git\cmd;C:\Users\Matebook E\AppData\Local\Microsoft\WindowsApps;;C:\Users\Matebook E\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Matebook E\AppData\Roaming\npm
+  C:\Windows\System32\HWAudioDriverLibs;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Program Files\nodejs\;D:\Program Files\Tencent\微信web开发者工具\dll;;C:\Program Files\Git\cmd;C:\Users\Matebook E\AppData\Local\Microsoft\WindowsApps;C:\Users\Matebook E\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Matebook E\AppData\Roaming\npm
 
 Yarn version: 
   1.22.17

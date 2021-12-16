@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
-
+const tokenscrect = '123456'
 
 // 跨域 cors
 const cors = require('cors')
 app.use(cors()); // 解除cors跨域限制
+const  jwt = require('jsonwebtoken');
 
 // mongodb 连接
 const mongoose = require('./db')  // 把刚才配置的mongoose链接导入
@@ -16,6 +17,44 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var jsonParser = bodyParser.json()
 app.use(jsonParser)
 app.use(urlencodedParser)
+
+// token 中间件
+
+app.use((req,res,next)=>{
+        req.jwt  = jwt;
+        next()
+})
+
+
+const checkapi = [
+        '/api/v1/order/preOrder',
+        // '/api/v1/order/getAll',
+        '/api/v1/linkman/add',
+        '/api/v1/linkman/getAll'
+]
+  // 如果请求的地址在检测检测范围以内 就需要对token进行检验
+app.use((req,res,next)=>{
+
+    const { url } = req;
+  
+    console.log('url',url)
+    if(checkapi.find(item=> url.startsWith(item) )){
+        const token = req.headers['authorization'];
+        try{
+            const decode = jwt.verify(token,tokenscrect)
+            req.decode = decode
+            console.log('decode',decode)
+            next()
+        } catch {
+            res.statusCode = 403
+        }
+      
+    } else {
+        next()
+    }
+
+})
+
 
 
 // 各个路由的导入

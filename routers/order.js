@@ -3,7 +3,7 @@ const  router = express.Router();
 
 const  Order = require('../model/order')
 const Flight = require('../model/flight')
-
+const redis = require('../utils/redis') // 引入redis
 // 添加预订单
 
 router.post('/preOrder', async (req,res)=>{
@@ -13,7 +13,7 @@ router.post('/preOrder', async (req,res)=>{
         // uid 不能通过 客户端发送过来 *** 
         // uid 都应该从token当中获取
         const { phone,startCity,arriveCity,startStationId,
-        arriveStationId,orderDate,linkMan ,flightNum } = req.body;
+        arriveStationId,orderDate,linkMan ,flightNum,code } = req.body;
 
         // 数据过滤
         if(!/^1[2-9]\d{9}$/.test(phone)) return res.send({success:false,info:'手机号码有误'})
@@ -24,9 +24,14 @@ router.post('/preOrder', async (req,res)=>{
         if(!orderDate) return res.send({success:false,info:'请选择出发时间'})
         if(linkMan.length === 0) return res.send({success:false,info:'请添加至少一个乘车人'})
 
-      
+
+        // 检验验证码是否正确
+
+        const _code  = await redis.get('code_'+phone)
+        if(code!=_code ) return res.send({success:false,info:'短信验证码不正确'})
+        
         // 暂时我先写死uid = 1      todo 之后补全使用token的方式来获取uid
-        const uid = 1 
+        const { uid } = req.decode
 
         // 先查询 航班信息 得到航班信息然后才能计算总价
         const flight = await Flight.findOne({flightNum})
@@ -77,10 +82,14 @@ router.post('/getAll', async(req,res)=>{
          page = page || 1; // 当前第几页
          limit = limit || 20; // 单页返回的条数限制
 
+         let  uid ;
           // 暂时我先写死uid = 1      todo 之后补全使用token的方式来获取uid 
-          const uid = 1 
+          if(req.decode) uid  = req.decode
+     
+         
 
-          let where = { uid }
+          let where = {  }
+          if(uid)  where.uid = uid;
           if(sdate && !edate )  where.createdAt = { $gt: sdate }
           if(!sdate && edate )  where.createdAt = { $lt: edate }
           if(sdate && edate )  where.createdAt = { $and: [ 

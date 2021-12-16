@@ -10,7 +10,7 @@ router.post('/add', async (req,res)=>{
     if( !/^1[23456789]\d{9}$/.test(phone)  )  return res.send( {success:false,info:'请填写一个正确的手机号码'});
     
    // 暂时我先写死uid = 1      todo 之后补全使用token的方式来获取uid
-    const uid = 1 
+    const { uid } = req.decode
     // todo 我们需要对用户的 真实姓名和身份证号码进行检验  
 
     // 添加入库
@@ -56,7 +56,7 @@ router.post('/edit',async (req,res)=>{
 router.post('/getAll', async(req,res)=>{
    
      // 暂时我先写死uid = 1      todo 之后补全使用token的方式来获取uid
-     const uid = 1 
+     const { uid } = req.decode
 
      try{
 

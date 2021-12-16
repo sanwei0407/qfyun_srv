@@ -8,4 +8,4 @@ const secretAccessKey = 'ps3dn1Ye4p1YCM3QBZpwhTK33l1iJv'
  
 let smsClient = new SMSClient({accessKeyId, secretAccessKey});
 
-export default smsClient;
+module.exports =  smsClient;
