@@ -100,7 +100,52 @@ router.post('/getAll', async(req,res)=>{
           const skip =  (page - 1 ) * limit; // 查询的起点（偏移量）
           try {
 
-            let orders = await Order.find(where,{},{skip,limit}) // 分页查询
+
+            // mongoose的聚合查询  
+            let orders = await Order.aggregate([
+                {
+                  $lookup: // 关联的表
+                    {
+                      from: "flights", // 外部去关联那个表
+                      localField: "flightNum", // 用orderb表当中哪个字段去关联
+                      foreignField: "flightNum", // 对应的外键字段
+                      as: "flightinfo" //查询出来的结果 别名
+                    },
+                  
+               },
+               {
+                $match: where // 条件
+               },
+               {
+                   $unwind: '$flightinfo' // 打散查询出来的数组起一个别名 
+                },
+               {
+                $project:{ // 指定查询的字段
+                    orderDate:1,  
+                    phone: 1,      // 当前订单的联系电话
+                    startCity: 1,  // 起点城市
+                    arriveCity: 1, // 到达城市
+                    startStationId: 1, // 起点站点id
+                    arriveStationId: 1, // 到达站点id
+                      // 1 已下单未支付 2 已支付待确认 3 已确认 待核销 4 用户已乘车 5 用户未乘车单已过期 6 用户退票申请中 7用户退票成功 8 用户退票失败 9 取消
+                    orderState: 1, 
+                    payAt: 1, // 用户支付时间
+                   
+                    orderDate: 1, // 订单的乘车时间
+                    checkDate: 1, // 乘车时的验票时间
+                    linkMan: 1 , // 当前订单的乘车人
+                    amount: 1, // 订单总金额 （以分为单位）
+                    // flightinfo:1
+                    flightinfo:'$flightinfo' // 在查询出来的数据当中 只把读取数组的第一个并赋值给flightinfo
+                }
+              
+                
+              },
+              {$limit:limit },//查询五条
+              { $skip :skip }
+            ])
+
+            // let orders = await Order.find(where,{},{skip,limit}) // 分页查询
             let count = await Order.count(where) // 获取符合条件的总数
             res.send({success:true,info:'查询成功',data:orders,count});
           }catch(e){
@@ -150,6 +195,27 @@ router.post('/changeOrder', async(req,res)=>{
     
 })
 
+// 核销订单接口
+router.post('/checkOrder', async(req,res)=>{
+    const {orderId,pwd } = req.body;
+    if(!orderId) return res.send({success:false,info:'请传入orderid'})
+    if(!pwd) return res.send({success:false,info:'请传入pwd'})
+
+    const _pwd = 'abcd' // 这里是模拟了一个 存在数据库当中的管理员密码
+
+    if(pwd!=_pwd) return res.send({success:false,info:'密码不正确'})
+
+    try{
+        await Order.findByIdAndUpdate(orderId,{ checkDate: new Date(),orderState:4 })
+
+         res.send({ success:true,info:'核销成功' })
+    }catch(e){
+        console.log(e)
+        res.send({success:false,info:'核销失败'})
+    }
+
+
+})
 
 
 module.exports = router;
