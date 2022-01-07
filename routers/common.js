@@ -1,8 +1,6 @@
 const express = require('express');
 const  router = express.Router();
-
 const smsClient = require('../utils/alisms')  // 引用配置号的aliyun短信sdk
-
 const redis = require('../utils/redis') // 引入redis
 const axios =require('axios') // 发起请求使用的类库  npm i axios 
 const User = require("../model/user")
@@ -149,6 +147,17 @@ router.post('/hotline', async (req,res)=>{
         })
 
         
+})
+
+router.post('/mpCode2Info',async (req,res)=>{
+    const {JSCODE } = req.body;
+    if(!JSCODE) return res.send({success:false,info:'请传入正确的code'});
+    const APPID = 'wxc3cfc0e36563db73';
+    const SECRET ='84fa407915ff79473ebfdf4b0a0cbe84';
+    let _res = await axios.get(`https://api.weixin.qq.com/sns/jscode2session?appid=${APPID}&secret=${SECRET}&js_code=${JSCODE}&grant_type=authorization_code`)
+
+    res.send({success:true,data:_res.data});    
+
 })
 
 module.exports = router;

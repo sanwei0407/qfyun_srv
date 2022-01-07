@@ -16,7 +16,7 @@ router.post('/add' ,async (req,res)=>{
          preDay ,
          startStations,
          arriveStations,
-         startTime
+         startTime,
         }  = req.body;
     
     if(!startCity)  return res.send({success:false,info:'请选择起点城市'})
