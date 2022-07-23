@@ -10,7 +10,7 @@ const Flight = require("../model/flight")
 // 从上面的链接进入就可以申请一个测试使用的 微信公众号 appid
 // 同学你们一定要更换为你们自己的 appid 和 screct不然会得不到结果
 const appid = 'wx9dd023ad774bc285'
-const appsrc = 'fa0fa3827628269b1ab0fad00ebf4306'
+const appsrc = 'fa0fa3827628269b1a2b0fad00ebf4306'
 
 const tokenscrect = '123456' // 一般而言这个密匙是只有开发人员知道的
 
@@ -99,8 +99,8 @@ router.post('/sendSms',async (req,res)=>{
         // 发送短信
         let _res = await smsClient.sendSMS({
             PhoneNumbers: phone,           // 手机号码
-            SignName: '三微智能',          // 短信签名
-            TemplateCode: 'SMS_193786026', // 短信模板 决定了短信内容
+            SignName: '三微2智能',          // 短信签名
+            TemplateCode: 'SMS_1913786026', // 短信模板 决定了短信内容
             TemplateParam: '{"code":"'+ randomstr + '"}' //  {"code": 要发送的验证码 }
         },{method:'POST'})
     
